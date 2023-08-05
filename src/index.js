@@ -6,6 +6,7 @@ module.exports = function toReadable (number) {
     const teen = 'teen';
     const ty = 'ty';
     let nums = {
+        0: 'zero',
         1: 'one',
         2: 'two',
         3: 'three',
@@ -16,6 +17,17 @@ module.exports = function toReadable (number) {
         8: 'eight',
         9: 'nine',
     };
+    let nums2 = {
+        11: 'eleven',
+        12: 'twelve',
+        13: 'thirteen',
+        14: 'fourteen',
+        15: 'fifteen',
+        16: 'sixty',
+        17: 'seventeen',
+        18: 'eighteen',
+        19: 'nineteen',
+    }
     const zero = 'zero';
     const one = 'one';
     const two = 'two';
@@ -136,40 +148,6 @@ module.exports = function toReadable (number) {
                 break;
             }
         }
-        //  if ((number > 20) && (number < 30)) { //рабочий код
-        //     res = twenty;
-        //     switch (number) {
-        //     case 21:
-        //         res += ' ' + one;
-        //         break;
-        //     case 22:
-        //         res += ' ' + two;
-        //         break;
-        //     case 23:
-        //         res += ' ' + three;
-        //         break;
-        //     case 24:
-        //         res += ' ' + four;
-        //         break;
-        //     case 25:
-        //         res += ' ' + five;
-        //         break;
-        //     case 26:
-        //         res += ' ' + six;
-        //         break;
-        //     case 27:
-        //         res += ' ' + seven;
-        //         break;
-        //     case 28:
-        //         res += ' ' + eight;
-        //         break;
-        //     case 29:
-        //         res += ' ' + nine;
-        //         break;
-        //     }
-        // }
-
-
 
         if ((number > 20) && (number <= 99)) {
           if (arrayDigits[1] !== 0) {
@@ -200,11 +178,22 @@ module.exports = function toReadable (number) {
           }
         }
 
+        if ((arrayDigits.length > 2) && (number % 100 === 0)) {
+            res = nums[arrayDigits[0]] + ' ' + hundred;
+        }
+
         if (number > 100) {
-            if ((arrayDigits[1] !== 0) && (arrayDigits[2] === 0)) {
-                if (arrayDigits[1] == 1) {
-                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + ten + ' ' + nums[arrayDigits[2]];
+            if (number % 100 !== 0) {
+                if ((arrayDigits[1] == 1) && (arrayDigits[2] === 0)) {
+                    res = nums[arrayDigits[0]] + ' ' + hundred + nums2[arrayDigits[2]];
                 }
+                if ((arrayDigits[1] === 1) && (arrayDigits[2] === 0)) {
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + ten;
+                }
+                if ((arrayDigits[1] === 0) && (arrayDigits[2] !== 0)) {
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' +nums[arrayDigits[2]];
+                }
+            if (arrayDigits[1] > 1) {
                 if (arrayDigits[1] == 2) {
                     res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + twenty + ' ' + nums[arrayDigits[2]];
                 }
@@ -231,6 +220,7 @@ module.exports = function toReadable (number) {
                 }
             }
         }
+    }
 
         return res;
 }

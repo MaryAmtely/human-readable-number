@@ -2403,11 +2403,11 @@ it('Should return \'one hundred ten\' when 110 given', () => {
 //   assert.equal(readable, 'three hundred ninety nine');
 // });
 
-// it('Should return \'four hundred\' when 400 given', () => {
-//   const readable = toReadable(400);
+it('Should return \'four hundred\' when 400 given', () => {
+  const readable = toReadable(400);
 
-//   assert.equal(readable, 'four hundred');
-// });
+  assert.equal(readable, 'four hundred');
+});
 
 // it('Should return \'four hundred one\' when 401 given', () => {
 //   const readable = toReadable(401);
