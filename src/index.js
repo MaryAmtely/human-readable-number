@@ -4,7 +4,6 @@ module.exports = function toReadable (number) {
     let res = '';
     const hundred = 'hundred';
     const teen = 'teen';
-    const ty = 'ty';
     let nums = {
         0: 'zero',
         1: 'one',
@@ -18,15 +17,25 @@ module.exports = function toReadable (number) {
         9: 'nine',
     };
     let nums2 = {
-        11: 'eleven',
-        12: 'twelve',
-        13: 'thirteen',
-        14: 'fourteen',
-        15: 'fifteen',
-        16: 'sixty',
-        17: 'seventeen',
-        18: 'eighteen',
-        19: 'nineteen',
+        1: 'eleven',
+        2: 'twelve',
+        3: 'thirteen',
+        4: 'fourteen',
+        5: 'fifteen',
+        6: 'sixteen',
+        7: 'seventeen',
+        8: 'eighteen',
+        9: 'nineteen',
+    }
+    let nums3 = {
+        2: 'twenty',
+        3: 'thirty',
+        4: 'forty',
+        5: 'fifty',
+        6: 'sixty',
+        7: 'seventy',
+        8: 'eighty',
+        9: 'ninety',
     }
     const zero = 'zero';
     const one = 'one';
@@ -184,16 +193,22 @@ module.exports = function toReadable (number) {
 
         if (number > 100) {
             if (number % 100 !== 0) {
-                if ((arrayDigits[1] == 1) && (arrayDigits[2] === 0)) {
-                    res = nums[arrayDigits[0]] + ' ' + hundred + nums2[arrayDigits[2]];
+                if ((arrayDigits[1] === 0) && (arrayDigits[0] !== 0)) { //сто один - сто девять 101-109
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + nums[arrayDigits[2]];
                 }
                 if ((arrayDigits[1] === 1) && (arrayDigits[2] === 0)) {
-                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + ten;
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + ten; // сто десять 110
                 }
-                if ((arrayDigits[1] === 0) && (arrayDigits[2] !== 0)) {
-                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' +nums[arrayDigits[2]];
+                if ((number % 10 === 0) && (arrayDigits[1] > 1)) {
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + nums3[arrayDigits[1]]; //деляться на 10, но больше 120
                 }
-            if (arrayDigits[1] > 1) {
+
+                if ((arrayDigits[1] === 1) && (arrayDigits[2] !== 0)) {
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + nums2[arrayDigits[2]];
+                }
+
+
+            if ((arrayDigits[1] > 1) && (arrayDigits[2] !== 0)) {
                 if (arrayDigits[1] == 2) {
                     res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + twenty + ' ' + nums[arrayDigits[2]];
                 }
