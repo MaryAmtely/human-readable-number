@@ -193,21 +193,18 @@ module.exports = function toReadable (number) {
 
         if (number > 100) {
             if (number % 100 !== 0) {
-                if ((arrayDigits[1] === 0) && (arrayDigits[0] !== 0)) { //сто один - сто девять 101-109
+                if ((arrayDigits[1] === 0) && (arrayDigits[0] !== 0)) {
                     res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + nums[arrayDigits[2]];
                 }
                 if ((arrayDigits[1] === 1) && (arrayDigits[2] === 0)) {
-                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + ten; // сто десять 110
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + ten;
                 }
                 if ((number % 10 === 0) && (arrayDigits[1] > 1)) {
-                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + nums3[arrayDigits[1]]; //деляться на 10, но больше 120
+                    res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + nums3[arrayDigits[1]];
                 }
-
                 if ((arrayDigits[1] === 1) && (arrayDigits[2] !== 0)) {
                     res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + nums2[arrayDigits[2]];
                 }
-
-
             if ((arrayDigits[1] > 1) && (arrayDigits[2] !== 0)) {
                 if (arrayDigits[1] == 2) {
                     res = nums[arrayDigits[0]] + ' ' + hundred + ' ' + twenty + ' ' + nums[arrayDigits[2]];
@@ -236,6 +233,5 @@ module.exports = function toReadable (number) {
             }
         }
     }
-
         return res;
 }
